@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.git/
+.gitignore
+.ipynb_checkpoints/
+notebooks/
+data/
+reports/
+.venv/
+env/
+*.egg-info/
+.pytest_cache/
+.DS_Store
+README.md

@@ -1,0 +1,14 @@
+services:
+  house-price-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: house-price-estimator:latest
+    container_name: house-price-estimator
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount models/ so you can retrain and refresh the model
+      # without rebuilding the image (dev convenience).
+      - ./models:/app/models:ro
+    restart: unless-stopped
