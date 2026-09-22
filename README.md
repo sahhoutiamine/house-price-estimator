@@ -1,4 +1,4 @@
-# 🏠 House Price Estimator
+# House Price Estimator
 
 Estimation automatique du prix de vente d'un logement à partir de ses
 caractéristiques (surface, chambres, localisation, qualité, année de
@@ -75,7 +75,7 @@ Ouvrir : http://localhost:8501
 docker compose down
 ```
 
-> ⚠️ Le modèle n'est **jamais réentraîné** dans le conteneur : il est
+> Le modèle n'est **jamais réentraîné** dans le conteneur : il est
 > entraîné une fois via les notebooks/scripts (Jour 1 à 4), sauvegardé dans
 > `models/` avec `joblib`, puis simplement **chargé** par l'app Streamlit
 > au démarrage.
