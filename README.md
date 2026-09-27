@@ -29,7 +29,7 @@ house-price-estimator/
 └── README.md             # Project documentation (this file)
 ```
 
-## 🛠️ Setup and Installation
+##  Setup and Installation
 
 ### Option 1: Using Docker (Recommended)
 
