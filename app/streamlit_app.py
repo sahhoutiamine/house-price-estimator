@@ -13,7 +13,17 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.preprocessing import build_model_input
 
 # Configuration of the Streamlit page
-st.set_page_config(page_title="House Price Estimator", page_icon="🏠", layout="centered")
+st.set_page_config(page_title="House Price Estimator", layout="centered")
+
+# Hide Streamlit default icons and menu
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 @st.cache_resource
 def load_resources():
@@ -55,7 +65,7 @@ def load_resources():
 # Load everything using the cached function
 model, scaler, feature_columns, continuous_columns, default_row, neighborhoods, max_yr_sold, y_train = load_resources()
 
-st.title("🏠 House Price Estimator")
+st.title("House Price Estimator")
 st.markdown("Welcome! Fill out the details below to get an estimated sale price for your house.")
 
 # Build the form
