@@ -1,89 +1,90 @@
-# House Price Estimator
+# House Price Estimator 🏡
 
-Estimation automatique du prix de vente d'un logement à partir de ses
-caractéristiques (surface, chambres, localisation, qualité, année de
-construction, état, équipements...), à l'aide d'un modèle de régression
-supervisée. Dataset : **House Prices - Advanced Regression Techniques**.
+An end-to-end Machine Learning project to estimate house sale prices based on various characteristics (e.g., area, rooms, location, quality, build year). This project uses the popular **House Prices - Advanced Regression Techniques** dataset (Ames Housing dataset) and features a fully dockerized Streamlit web application for interactive predictions.
 
-## Structure du projet
+## 🚀 Features
 
-```
+- **Exploratory Data Analysis (EDA) & Modeling**: Comprehensive Jupyter notebooks covering data cleaning, feature engineering, and model training/tuning.
+- **Robust Preprocessing Pipeline**: Reusable Python scripts that accurately recreate the training environment's feature vectors for real-time inference.
+- **Interactive Web App**: A user-friendly Streamlit interface that accepts user input, processes it, and predicts the house price on the fly, visualizing it against historical distributions.
+- **Containerization**: Fully Dockerized application for simple setup and deployment without local dependency issues.
+
+## 📁 Project Structure
+
+```text
 house-price-estimator/
-├── data/
-│   ├── raw/              # Données brutes (train.csv, test.csv) — non versionnées
-│   └── processed/        # Données nettoyées / transformées
-├── notebooks/            # Notebooks d'exploration, EDA, feature engineering, modélisation
-├── src/                  # Code réutilisable (préprocessing, feature engineering, training)
-├── models/                # Modèles entraînés sauvegardés (joblib/pickle)
-├── reports/figures/       # Graphiques exportés
-├── app/
-│   └── streamlit_app.py  # Application Streamlit de prédiction
-├── requirements.txt
-├── Dockerfile
-├── docker-compose.yml
-└── README.md
+├── app/                  # Streamlit application
+│   └── streamlit_app.py  # Main entry point for the web app
+├── data/                 
+│   ├── raw/              # Raw data (train.csv, test.csv)
+│   └── processed/        # Cleaned and processed datasets
+├── models/               # Saved model artifacts (model, scaler, column references, default values)
+├── notebooks/            # Jupyter Notebooks for EDA, feature engineering, and model selection
+├── reports/              # Generated analysis reports and figures
+├── src/                  # Source code for shared logic
+│   └── preprocessing.py  # Feature engineering and data alignment logic for inference
+├── Dockerfile            # Docker configuration for the application
+├── docker-compose.yml    # Docker Compose setup for easy orchestration
+├── requirements.txt      # Python dependencies
+└── README.md             # Project documentation (this file)
 ```
 
-## Plan du projet (5 jours)
+## 🛠️ Setup and Installation
 
-| Jour | Contenu |
-|------|---------|
-| 1 | Exploration, nettoyage, préparation des données |
-| 2 | EDA + visualisations + Feature Engineering |
-| 3 | Entraînement de 3 modèles + premières évaluations |
-| 4 | Cross-validation + GridSearchCV + comparaison + analyse des erreurs |
-| 5 | Streamlit + Docker + README + finalisation |
+### Option 1: Using Docker (Recommended)
 
-## Setup local (sans Docker)
+Running the app via Docker is the easiest way to get started.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate        # Windows : .venv\Scripts\activate
-pip install -r requirements.txt
-jupyter notebook notebooks/
-```
+1. **Build the Docker Image:**
+   ```bash
+   docker compose build
+   ```
+2. **Run the Container:**
+   ```bash
+   docker compose up
+   ```
+3. **Access the App:**
+   Open your browser and navigate to http://localhost:8501
+4. **Stop the Container:**
+   ```bash
+   docker compose down
+   ```
 
-Placer `train.csv` (et `test.csv` si besoin) dans `data/raw/` avant de lancer
-les notebooks.
+*Note: The `models/` directory is mounted into the container. If you retrain models using the notebooks, the updated `.pkl` files will be automatically accessible to the app on restart.*
 
-## Docker
+### Option 2: Local Setup (Without Docker)
 
-### Construire l'image
+1. **Create and Activate a Virtual Environment:**
+   ```bash
+   python -m venv .venv
+   # On Windows
+   .venv\Scripts\activate
+   # On macOS/Linux
+   source .venv/bin/activate
+   ```
+2. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Run the Streamlit App:**
+   ```bash
+   streamlit run app/streamlit_app.py
+   ```
+4. **(Optional) Run Jupyter Notebooks:**
+   ```bash
+   jupyter notebook notebooks/
+   ```
 
-```bash
-docker compose build
-```
+## 🧠 Machine Learning Pipeline
 
-(équivalent brut : `docker build -t house-price-estimator:latest .`)
+1. **Data Prep**: Data is sourced from `data/raw/` (ensure you place `train.csv` here if not present).
+2. **Training**: Executed via the provided notebooks, generating cleaned datasets in `data/processed/` and saving artifacts in the `models/` directory using `joblib`.
+3. **Inference**: The Streamlit app takes user input, applies the exact same transformations (via `src/preprocessing.py`), scales continuous variables, and outputs the prediction.
 
-### Lancer le conteneur
-
-```bash
-docker compose up
-```
-
-(équivalent brut :
-`docker run -p 8501:8501 -v $(pwd)/models:/app/models:ro house-price-estimator:latest`)
-
-### Accéder à l'application
-
-Ouvrir : http://localhost:8501
-
-### Arrêter le conteneur
-
-```bash
-docker compose down
-```
-
-> Le modèle n'est **jamais réentraîné** dans le conteneur : il est
-> entraîné une fois via les notebooks/scripts (Jour 1 à 4), sauvegardé dans
-> `models/` avec `joblib`, puis simplement **chargé** par l'app Streamlit
-> au démarrage.
-
-## Données
-
-Dataset : *House Prices - Advanced Regression Techniques*.
-Variable cible : `SalePrice`.
-
-Placer les fichiers `train.csv` (obligatoire) et `test.csv` (optionnel) dans
-`data/raw/`.
+## 💻 Tech Stack
+- **Python 3.11**
+- **Pandas & NumPy** (Data manipulation)
+- **Scikit-Learn & XGBoost** (Modeling & Pipeline)
+- **Streamlit** (Web Interface)
+- **Matplotlib & Seaborn** (Data Visualization)
+- **Docker** (Containerization)
