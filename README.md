@@ -1,15 +1,15 @@
-# House Price Estimator 🏡
+# House Price Estimator 
 
 An end-to-end Machine Learning project to estimate house sale prices based on various characteristics (e.g., area, rooms, location, quality, build year). This project uses the popular **House Prices - Advanced Regression Techniques** dataset (Ames Housing dataset) and features a fully dockerized Streamlit web application for interactive predictions.
 
-## 🚀 Features
+##  Features
 
 - **Exploratory Data Analysis (EDA) & Modeling**: Comprehensive Jupyter notebooks covering data cleaning, feature engineering, and model training/tuning.
 - **Robust Preprocessing Pipeline**: Reusable Python scripts that accurately recreate the training environment's feature vectors for real-time inference.
 - **Interactive Web App**: A user-friendly Streamlit interface that accepts user input, processes it, and predicts the house price on the fly, visualizing it against historical distributions.
 - **Containerization**: Fully Dockerized application for simple setup and deployment without local dependency issues.
 
-## 📁 Project Structure
+##  Project Structure
 
 ```text
 house-price-estimator/
@@ -75,13 +75,13 @@ Running the app via Docker is the easiest way to get started.
    jupyter notebook notebooks/
    ```
 
-## 🧠 Machine Learning Pipeline
+##  Machine Learning Pipeline
 
 1. **Data Prep**: Data is sourced from `data/raw/` (ensure you place `train.csv` here if not present).
 2. **Training**: Executed via the provided notebooks, generating cleaned datasets in `data/processed/` and saving artifacts in the `models/` directory using `joblib`.
 3. **Inference**: The Streamlit app takes user input, applies the exact same transformations (via `src/preprocessing.py`), scales continuous variables, and outputs the prediction.
 
-## 💻 Tech Stack
+##  Tech Stack
 - **Python 3.11**
 - **Pandas & NumPy** (Data manipulation)
 - **Scikit-Learn & XGBoost** (Modeling & Pipeline)
